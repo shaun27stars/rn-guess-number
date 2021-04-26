@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  FlatList,
+  Dimensions
+} from "react-native";
 import Colors from "../constants/colors";
 import BodyText from "./BodyText";
 
@@ -14,6 +21,11 @@ const renderListItem = (listLength, itemData) => {
 };
 
 const GuessList = (props) => {
+  let listContainerStyle = styles.listContainer;
+
+  if (Dimensions.get("window").width > 350) {
+    listContainerStyle = styles.listContainerBig;
+  }
   return (
     // <ScrollView
     //   style={styles.container}
@@ -29,7 +41,7 @@ const GuessList = (props) => {
     // </ScrollView>
 
     <FlatList
-      style={styles.container}
+      style={listContainerStyle}
       contentContainerStyle={styles.listContent}
       keyExtractor={(item) => item.toString()}
       data={props.guesses}
@@ -41,7 +53,11 @@ const GuessList = (props) => {
 export default GuessList;
 
 const styles = StyleSheet.create({
-  container: {
+  listContainer: {
+    width: "70%",
+    marginTop: 10
+  },
+  listContainerBig: {
     width: "40%",
     marginTop: 10
   },
